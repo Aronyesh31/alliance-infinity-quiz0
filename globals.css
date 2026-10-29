@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+/* ALLIANCE × INFINITY CLUB — design tokens
+   Ink navy ground, electric ion (purple), volt (blue) and flux (cyan) accents.
+   Unbounded carries the brand voice; Instrument Sans carries reading. */
+
+@theme {
+  --color-ink: #050919;
+  --color-night: #0a1029;
+  --color-deep: #10183b;
+  --color-raise: #172152;
+  --color-line: rgb(150 165 255 / 0.14);
+  --color-line-strong: rgb(150 165 255 / 0.28);
+
+  --color-ion: #8b5cff;
+  --color-ion-soft: #b79bff;
+  --color-volt: #3d6bff;
+  --color-flux: #22d8f0;
+  --color-pulse: #e44fd2;
+
+  --color-text: #f3f5ff;
+  --color-mute: #9aa4cf;
+  --color-faint: #67719e;
+
+  --color-good: #31e3a8;
+  --color-bad: #ff5c7c;
+  --color-warn: #ffc857;
+
+  --font-display: "Unbounded Variable", "Unbounded", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Instrument Sans Variable", "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-key: 14px;
+
+  --animate-orbit: orbit 9s linear infinite;
+  --animate-breathe: breathe 6s ease-in-out infinite;
+  --animate-rise: rise 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+
+  @keyframes orbit {
+    to {
+      stroke-dashoffset: -1000;
+    }
+  }
+  @keyframes breathe {
+    0%,
+    100% {
+      opacity: 0.55;
+    }
+    50% {
+      opacity: 0.9;
+    }
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(10px) scale(0.985);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    background: var(--color-ink);
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    background: var(--color-ink);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100dvh;
+  }
+  ::selection {
+    background: rgb(139 92 255 / 0.45);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-flux);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  input[type="number"]::-webkit-inner-spin-button {
+    opacity: 0.4;
+  }
+}
+
+@layer components {
+  /* Quiet vertical field of light behind every screen. */
+  .field {
+    background:
+      radial-gradient(1200px 600px at 85% -10%, rgb(61 107 255 / 0.18), transparent 60%),
+      radial-gradient(900px 520px at -10% 110%, rgb(139 92 255 / 0.16), transparent 60%),
+      var(--color-ink);
+  }
+  .hairline {
+    border-color: var(--color-line);
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  .glow-text {
+    text-shadow: 0 0 32px rgb(139 92 255 / 0.45);
+  }
+  .brand-gradient {
+    background-image: linear-gradient(100deg, var(--color-ion) 0%, var(--color-volt) 50%, var(--color-flux) 100%);
+  }
+  .brand-gradient-text {
+    background-image: linear-gradient(100deg, var(--color-ion-soft) 0%, #8fa8ff 45%, var(--color-flux) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
